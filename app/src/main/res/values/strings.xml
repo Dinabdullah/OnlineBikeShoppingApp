@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">OnlineBikeShoppingApp</string>
+    <string name="all">All</string>
+    <string name="title1">PEUGEOT- LR01</string>
+    <string name="title2">PILOT - CHROMOLY 520</string>
+    <string name="title3">SMITH - Trade</string>
+    <string name="price1">$ 1,999.99 </string>
+    <string name="price2">$ 3,999.99</string>
+    <string name="price3">$ 120</string>
+
+
+</resources>

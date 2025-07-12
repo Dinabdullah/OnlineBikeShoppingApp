@@ -1,0 +1,89 @@
+package com.example.onlinebikeshoppingapp.thirdScreen
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.onlinebikeshoppingapp.R
+
+@Composable
+fun ItemCounter(
+    modifier: Modifier = Modifier,
+    icount: Int = 1
+) {
+    var count by remember { mutableIntStateOf(icount) }
+
+    Row(
+        modifier = modifier
+            .width(dimensionResource(id = R.dimen.counter_width))
+            .height(dimensionResource(id = R.dimen.counter_height))
+            .shadow(
+                elevation = 4.dp,
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)),
+                ambientColor = colorResource(id = R.color.shadow_color),
+                spotColor = colorResource(id = R.color.shadow_color)
+            )
+            .background(
+                color = colorResource(id = R.color.counter_background),
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius))
+            ),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.additem),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_small))
+                .clickable { count++ }
+        )
+        Text(
+            text = count.toString(),
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = dimensionResource(id = R.dimen.counter_text_size).value.sp,
+                textAlign = TextAlign.Center,
+                color = Color.White
+            )
+        )
+        Image(
+            painter = painterResource(id = R.drawable.minusitem),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_small))
+                .clickable {
+                    if (count > 0) count--
+                }
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun ItemCounterPreview() {
+    ItemCounter()
+}
