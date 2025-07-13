@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.onlinebikeshoppingapp.firstScreen.FirstScreen
+import com.example.onlinebikeshoppingapp.thirdScreen.ThirdScreen
 import com.example.onlinebikeshoppingapp.ui.theme.OnlineBikeShoppingAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             OnlineBikeShoppingAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
-                    FirstScreen()
+                    ThirdScreen()
                 }
             }
         }

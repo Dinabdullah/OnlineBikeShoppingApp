@@ -32,6 +32,7 @@ fun CustomShoppingCartItem(
     imageRes: Int,
     @StringRes title: Int,
     @StringRes price: Int,
+    itemCounterViewModel: ItemCounterViewModel
 ) {
     Row(
         modifier = modifier
@@ -79,7 +80,7 @@ fun CustomShoppingCartItem(
                 .fillMaxHeight()
                 .padding(top = 66.dp)
         ) {
-            ItemCounter()
+            ItemCounter(viewModel = itemCounterViewModel)
         }
 
     }
@@ -92,13 +93,14 @@ fun CustomShoppingCartItem(
 
 }
 
-
-@Preview
-@Composable
-private fun CustomShoppingCartItemPreview() {
-    CustomShoppingCartItem(
-        price = R.string.price1,
-        title = R.string.title1,
-        imageRes = R.drawable.bike2
-    )
-}
+//
+//@Preview
+//@Composable
+//private fun CustomShoppingCartItemPreview() {
+//    CustomShoppingCartItem(
+//        price = R.string.price1,
+//        title = R.string.title1,
+//        imageRes = R.drawable.bike2,
+//        itemCounterViewModel = viewModel1
+//    )
+//}
