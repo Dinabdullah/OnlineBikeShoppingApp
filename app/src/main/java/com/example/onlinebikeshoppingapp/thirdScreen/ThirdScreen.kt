@@ -1,6 +1,8 @@
 package com.example.onlinebikeshoppingapp.thirdScreen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -9,31 +11,26 @@ import com.example.onlinebikeshoppingapp.R
 
 @Composable
 fun ThirdScreen(modifier: Modifier = Modifier) {
-    val viewModel1: ItemCounterViewModel = viewModel(key = "item1")
-    val viewModel2: ItemCounterViewModel = viewModel(key = "item2")
-    val viewModel3: ItemCounterViewModel = viewModel(key = "item3")
-    Column {
-        CustomShoppingCartItem(
-            imageRes = R.drawable.bike1,
-            title = R.string.title1,
-            price = R.string.price1,
-            itemCounterViewModel = viewModel1
-        )
-        CustomShoppingCartItem(
-            imageRes = R.drawable.bike2,
-            title = R.string.title2,
-            price = R.string.price2,
-            itemCounterViewModel = viewModel2
-        )
-        CustomShoppingCartItem(
-            imageRes = R.drawable.bike3,
-            title = R.string.title3,
-            price = R.string.price3,
-            itemCounterViewModel = viewModel3
-        )
+    val items = listOf(
+        BikeItem(R.drawable.bike1, R.string.title1, R.string.price1),
+        BikeItem(R.drawable.bike2, R.string.title2, R.string.price2),
+        BikeItem(R.drawable.bike3, R.string.title3, R.string.price3)
+    )
 
+    LazyColumn(modifier = modifier) {
+        itemsIndexed(items) { index, item ->
+            val viewModel: ItemCounterViewModel = viewModel(key = "item_$index")
+
+            CustomShoppingCartItem(
+                imageRes = item.imageRes,
+                title = item.titleRes,
+                price = item.priceRes,
+                itemCounterViewModel = viewModel
+            )
+        }
     }
 }
+
 
 
 @Preview

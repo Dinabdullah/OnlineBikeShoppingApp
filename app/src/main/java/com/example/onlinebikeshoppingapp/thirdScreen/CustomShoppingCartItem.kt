@@ -93,14 +93,15 @@ fun CustomShoppingCartItem(
 
 }
 
-//
-//@Preview
-//@Composable
-//private fun CustomShoppingCartItemPreview() {
-//    CustomShoppingCartItem(
-//        price = R.string.price1,
-//        title = R.string.title1,
-//        imageRes = R.drawable.bike2,
-//        itemCounterViewModel = viewModel1
-//    )
-//}
+
+@Preview
+@Composable
+private fun CustomShoppingCartItemPreview() {
+    val fakeViewModel = object : ItemCounterViewModel() {}
+    CustomShoppingCartItem(
+        price = R.string.price1,
+        title = R.string.title1,
+        imageRes = R.drawable.bike2,
+        itemCounterViewModel = fakeViewModel
+    )
+}
