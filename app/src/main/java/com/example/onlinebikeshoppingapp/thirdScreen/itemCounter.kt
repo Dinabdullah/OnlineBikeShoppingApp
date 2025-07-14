@@ -5,9 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,22 +30,21 @@ import com.example.onlinebikeshoppingapp.R
 
 @Composable
 fun ItemCounter(
+    itemId: Int,
     modifier: Modifier = Modifier,
-    viewModel: ItemCounterViewModel = viewModel()
+    viewModel: ShoppingCartViewModel
 ) {
-    val count by viewModel.count.collectAsState()
+    val count by viewModel.getCount(itemId).collectAsState()
 
     Row(
         modifier = modifier
-            .width(dimensionResource(id = R.dimen.counter_width))
-            .height(dimensionResource(id = R.dimen.counter_height))
             .shadow(
                 elevation = 4.dp,
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)),
                 ambientColor = colorResource(id = R.color.card_background),
                 spotColor = colorResource(id = R.color.card_background)
             )
-            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius))) //clip
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)))
             .background(
                 color = colorResource(id = R.color.counter_background),
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius))
@@ -56,12 +53,13 @@ fun ItemCounter(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(id = R.drawable.additem),
+            painter = painterResource(id = R.drawable.minusitem),
             contentDescription = null,
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding_small))
-                .clickable { viewModel.increase() }
+                .clickable { viewModel.decrease(itemId) }
         )
+
         Text(
             text = count.toString(),
             style = TextStyle(
@@ -71,18 +69,20 @@ fun ItemCounter(
                 color = Color.White
             )
         )
+
         Image(
-            painter = painterResource(id = R.drawable.minusitem),
+            painter = painterResource(id = R.drawable.additem),
             contentDescription = null,
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding_small))
-                .clickable { viewModel.decrease() }
+                .clickable { viewModel.increase(itemId) }
         )
     }
 }
 
+
 @Preview
 @Composable
 private fun ItemCounterPreview() {
-    ItemCounter()
+    ItemCounter(itemId = 1, viewModel = viewModel())
 }

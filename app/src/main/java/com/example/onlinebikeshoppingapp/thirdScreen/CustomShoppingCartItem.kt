@@ -1,13 +1,12 @@
 package com.example.onlinebikeshoppingapp.thirdScreen
 
-import androidx.annotation.StringRes
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,10 +28,8 @@ import com.example.onlinebikeshoppingapp.R
 @Composable
 fun CustomShoppingCartItem(
     modifier: Modifier = Modifier,
-    imageRes: Int,
-    @StringRes title: Int,
-    @StringRes price: Int,
-    itemCounterViewModel: ItemCounterViewModel
+    item: BikeItem,
+    viewModel: ShoppingCartViewModel
 ) {
     Row(
         modifier = modifier
@@ -43,16 +40,14 @@ fun CustomShoppingCartItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Box(
+
+        CustomItem(
+            imageRes = item.imageRes,
             modifier = Modifier
                 .width(100.dp)
                 .height(90.dp)
-        ) {
-            CustomItem(
-                imageRes = imageRes,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
+        )
+
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -62,7 +57,7 @@ fun CustomShoppingCartItem(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                stringResource(id = title),
+                text = stringResource(id = item.titleRes),
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp,
@@ -70,38 +65,45 @@ fun CustomShoppingCartItem(
                 )
             )
             Text(
-                stringResource(id = price),
-                style = TextStyle(fontSize = 13.sp, color = colorResource(id = R.color.price_blue))
+                text = stringResource(id = item.priceRes),
+                style = TextStyle(
+                    fontSize = 13.sp,
+                    color = colorResource(id = R.color.price_blue)
+                )
             )
-
         }
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(top = 66.dp)
-        ) {
-            ItemCounter(viewModel = itemCounterViewModel)
-        }
+        ItemCounter(
+            itemId = item.id, viewModel = viewModel, modifier = Modifier
+                .padding(top = 50.dp)
+        )
 
     }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(0.5.dp)
             .background(Color.White.copy(alpha = 0.3f))
     )
-
 }
 
 
-@Preview
+@SuppressLint("ViewModelConstructorInComposable")
+@Preview(showBackground = true)
 @Composable
 private fun CustomShoppingCartItemPreview() {
-    val fakeViewModel = object : ItemCounterViewModel() {}
-    CustomShoppingCartItem(
-        price = R.string.price1,
-        title = R.string.title1,
+    val dummyItem = BikeItem(
+        id = 1,
         imageRes = R.drawable.bike2,
-        itemCounterViewModel = fakeViewModel
+        titleRes = R.string.title1,
+        priceRes = R.string.price1
+    )
+    val dummyViewModel = ShoppingCartViewModel()
+
+    CustomShoppingCartItem(
+        item = dummyItem,
+        viewModel = dummyViewModel
     )
 }
+
+

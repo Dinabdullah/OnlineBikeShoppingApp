@@ -1,7 +1,8 @@
 package com.example.onlinebikeshoppingapp.thirdScreen
 
 data class BikeItem(
+    val id: Int,
     val imageRes: Int,
     val titleRes: Int,
-    val priceRes: Int
+    val priceRes: Int,
 )
