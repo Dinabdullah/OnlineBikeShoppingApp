@@ -10,9 +10,9 @@ class ShoppingCartViewModel : ViewModel() {
 
     private val _items = MutableStateFlow(
         listOf(
-            BikeItem(1, R.drawable.bike1, R.string.title1, R.string.price1),
-            BikeItem(2, R.drawable.bike2, R.string.title2, R.string.price2),
-            BikeItem(3, R.drawable.bike3, R.string.title3, R.string.price3)
+            BikeItem(1, R.drawable.bike1, R.string.title1, 10.0),
+            BikeItem(2, R.drawable.bike2, R.string.title2, 20.0),
+            BikeItem(3, R.drawable.bike3, R.string.title3, 30.0)
         )
     )
     val items: StateFlow<List<BikeItem>> = _items

@@ -66,7 +66,7 @@ fun CustomShoppingCartItem(
                 )
             )
             Text(
-                text = stringResource(id = item.priceRes),
+                text = "$${String.format("%.2f", item.price)}",
                 style = TextStyle(
                     fontSize = 13.sp,
                     color = colorResource(id = R.color.price_blue)
@@ -99,7 +99,7 @@ private fun CustomShoppingCartItemPreview() {
         id = 1,
         imageRes = R.drawable.bike2,
         titleRes = R.string.title1,
-        priceRes = R.string.price1
+        price = 10.0
     )
 
     CustomShoppingCartItem(

@@ -6,6 +6,6 @@ data class BikeItem(
     val id: Int,
     val imageRes: Int,
     val titleRes: Int,
-    val priceRes: Int,
+    val price: Double,
     val count: MutableStateFlow<Int> = MutableStateFlow(1)
 )
