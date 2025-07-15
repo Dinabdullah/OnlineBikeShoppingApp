@@ -29,7 +29,8 @@ import com.example.onlinebikeshoppingapp.R
 fun CustomShoppingCartItem(
     modifier: Modifier = Modifier,
     item: BikeItem,
-    viewModel: ShoppingCartViewModel
+    onIncrease: () -> Unit,
+    onDecrease: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -41,7 +42,7 @@ fun CustomShoppingCartItem(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
-        CustomItem(
+        ProductImage(
             imageRes = item.imageRes,
             modifier = Modifier
                 .width(100.dp)
@@ -72,11 +73,13 @@ fun CustomShoppingCartItem(
                 )
             )
         }
-        ItemCounter(
-            itemId = item.id, viewModel = viewModel, modifier = Modifier
-                .padding(top = 50.dp)
-        )
 
+        ItemCounter(
+            item = item,
+            modifier = Modifier.padding(top = 50.dp),
+            onDecrease = onDecrease,
+            onIncrease = onIncrease
+        )
     }
 
     Box(
@@ -88,8 +91,8 @@ fun CustomShoppingCartItem(
 }
 
 
-@SuppressLint("ViewModelConstructorInComposable")
-@Preview(showBackground = true)
+@SuppressLint("UnrememberedMutableState")
+@Preview()
 @Composable
 private fun CustomShoppingCartItemPreview() {
     val dummyItem = BikeItem(
@@ -98,12 +101,13 @@ private fun CustomShoppingCartItemPreview() {
         titleRes = R.string.title1,
         priceRes = R.string.price1
     )
-    val dummyViewModel = ShoppingCartViewModel()
 
     CustomShoppingCartItem(
         item = dummyItem,
-        viewModel = dummyViewModel
+        onIncrease = {},
+        onDecrease = {}
     )
 }
+
 
 

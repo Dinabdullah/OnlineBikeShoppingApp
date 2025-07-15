@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.onlinebikeshoppingapp.R
 
 @Composable
-fun CustomItem(
+fun ProductImage(
     @DrawableRes imageRes: Int,
     modifier: Modifier = Modifier
 ) {
@@ -53,5 +53,5 @@ fun CustomItem(
 @Preview
 @Composable
 private fun CustomItemPreview() {
-    CustomItem(imageRes = R.drawable.bike2)
+    ProductImage(imageRes = R.drawable.bike2)
 }

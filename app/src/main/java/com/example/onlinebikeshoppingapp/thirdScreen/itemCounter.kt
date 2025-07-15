@@ -25,17 +25,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.onlinebikeshoppingapp.R
 
 @Composable
 fun ItemCounter(
-    itemId: Int,
     modifier: Modifier = Modifier,
-    viewModel: ShoppingCartViewModel
+    item: BikeItem,
+    onIncrease: () -> Unit,
+    onDecrease: () -> Unit
 ) {
-    val count by viewModel.getCount(itemId).collectAsState()
-
+    val count by item.count.collectAsState()
     Row(
         modifier = modifier
             .shadow(
@@ -57,7 +56,7 @@ fun ItemCounter(
             contentDescription = null,
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding_small))
-                .clickable { viewModel.decrease(itemId) }
+                .clickable { onDecrease() }
         )
 
         Text(
@@ -75,14 +74,25 @@ fun ItemCounter(
             contentDescription = null,
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding_small))
-                .clickable { viewModel.increase(itemId) }
+                .clickable { onIncrease() }
         )
     }
 }
 
 
-@Preview
+@Preview()
 @Composable
 private fun ItemCounterPreview() {
-    ItemCounter(itemId = 1, viewModel = viewModel())
+    val dummyItem = BikeItem(
+        id = 1,
+        imageRes = R.drawable.bike1,
+        titleRes = R.string.title1,
+        priceRes = R.string.price1
+    )
+
+    ItemCounter(
+        item = dummyItem,
+        onIncrease = { },
+        onDecrease = { }
+    )
 }
