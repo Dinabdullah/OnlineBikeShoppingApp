@@ -10,10 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.onlinebikeshoppingapp.R
 
 @Composable
 fun PriceDetails(
@@ -33,7 +36,7 @@ fun PriceDetails(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                "Subtotal:",
+                stringResource(R.string.subtotal),
                 color = Color.White,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium
@@ -53,7 +56,7 @@ fun PriceDetails(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                "Delivery Fee:",
+                stringResource(R.string.delivery_fee),
                 color = Color.White,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium
@@ -68,12 +71,12 @@ fun PriceDetails(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 10.dp),
+                .padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                "Discount:",
+                stringResource(R.string.discount),
                 color = Color.White,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium
@@ -93,14 +96,14 @@ fun PriceDetails(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                "Total:\"",
+                stringResource(R.string.total),
                 color = Color.White,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium
             )
             Text(
                 "\$ $total",
-                color = Color.White,
+                color = colorResource(id = R.color.total_price),
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium
             )

@@ -3,8 +3,8 @@ package com.example.onlinebikeshoppingapp.thirdScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -18,19 +18,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,11 +42,7 @@ fun ThirdScreen(
     modifier: Modifier = Modifier
 ) {
     val viewModel: ShoppingCartViewModel = viewModel()
-    var applyCodeState by remember { mutableStateOf("") }
-    var isPromoApplied by remember { mutableStateOf(false) }
-    var subtotal by remember { mutableStateOf(0.0) }
-    var total by remember { mutableStateOf(0.0) }
-
+    val state by viewModel.state.collectAsState()
 
     Scaffold(
         topBar = {
@@ -59,19 +54,13 @@ fun ThirdScreen(
                 navigationIcon = {
                     Box(
                         modifier = Modifier
-                            .padding(start = 15.dp)
-                            .width(44.dp)
-                            .height(44.dp)
+                            .padding(start = 20.dp)
+                            .padding(vertical = 10.dp)
+                            .width(dimensionResource(id = R.dimen.icon_w_h))
+                            .height(dimensionResource(id = R.dimen.icon_w_h))
                             .clip(RoundedCornerShape(10.dp))
-                            .background(
-                                brush = Brush.linearGradient(
-                                    colors = listOf(
-                                        Color(0xFF34C8E8),
-                                        Color(0xFF4E4AF2)
-                                    )
-                                )
-                            )
-                            .clickable { /* Handle click here */ },
+                            .gradientBackground()
+                            .clickable { },
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -83,58 +72,68 @@ fun ThirdScreen(
                 },
                 title = {
                     Text(
-                        "Centered Top App Bar",
+                        stringResource(R.string.my_shopping_cart),
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
                     )
                 }
             )
         }
     ) { paddingValues ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .background(colorResource(id = R.color.card_background))
                 .fillMaxSize()
+                .padding(paddingValues)
         ) {
-            LazyColumn(modifier = modifier.padding(paddingValues)) {
-                items(viewModel.items.value) { item ->
-                    CustomShoppingCartItem(
-                        item = item,
-                        onDecrease = { viewModel.decrease(item.id) },
-                        onIncrease = { viewModel.increase(item.id) }
-                    )
-                }
-            }
-            Text(
-                "Your bag qualifies for free shipping",
-                fontSize = 15.sp,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                modifier = modifier
-                    .padding(top = 24.dp)
-                    .padding(horizontal = 70.dp)
-            )
-            ApplyCodeRow(onClick = {
-                applyCodeState = it
-                isPromoApplied = true
-                subtotal = viewModel.items.value.sumOf { item ->
-                    item.price * item.count.value
-                }
-                total = subtotal
-            })
-            if (isPromoApplied) {
-                PriceDetails(
-                    total = total,
-                    subtotal = subtotal
+            items(state.items) { item ->
+                CustomShoppingCartItem(
+                    item = item,
+                    onDecrease = { viewModel.onEvent(CartEvent.Decrease(item.id)) },
+                    onIncrease = { viewModel.onEvent(CartEvent.Increase(item.id)) }
                 )
             }
 
+            item {
+                Text(
+                    stringResource(R.string.your_bag_qualifies_for_free_shipping),
+                    fontSize = 15.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp)
+                )
+            }
+
+            item {
+                ApplyCodeRow(onClick = {
+                    viewModel.onEvent(CartEvent.ApplyCode(it))
+                })
+            }
+
+            if (state.isPromoApplied) {
+                item {
+                    PriceDetails(
+                        total = state.total,
+                        subtotal = state.subtotal
+                    )
+                }
+            }
         }
-
-
     }
 }
 
+
+fun Modifier.gradientBackground(): Modifier {
+    return this.background(
+        brush = Brush.linearGradient(
+            colors = listOf(
+                Color(0xFF34C8E8),
+                Color(0xFF4E4AF2)
+            )
+        )
+    )
+}
 @Preview
 @Composable
 private fun ThirdScreenPreview() {

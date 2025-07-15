@@ -7,6 +7,14 @@
     <string name="price1">$ 1,999.99 </string>
     <string name="price2">$ 3,999.99</string>
     <string name="price3">$ 120</string>
+    <string name="your_bag_qualifies_for_free_shipping">Your bag qualifies for free shipping</string>
+    <string name="apply">Apply</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="delivery_fee">Delivery Fee:</string>
+    <string name="discount">Discount:</string>
+    <string name="total">Total:\"</string>
+    <string name="checkout">Checkout</string>
+    <string name="my_shopping_cart">My Shopping Cart</string>
 
 
 </resources>

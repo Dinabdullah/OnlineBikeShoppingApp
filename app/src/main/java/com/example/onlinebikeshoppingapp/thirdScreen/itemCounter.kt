@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +32,7 @@ fun ItemCounter(
     onIncrease: () -> Unit,
     onDecrease: () -> Unit
 ) {
-    val count by item.count.collectAsState()
+    val count = item.count
     Row(
         modifier = modifier
             .shadow(
@@ -87,7 +85,7 @@ private fun ItemCounterPreview() {
         id = 1,
         imageRes = R.drawable.bike1,
         titleRes = R.string.title1,
-        price= 10.0
+        price = 10.0
     )
 
     ItemCounter(

@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,18 +53,11 @@ fun CheckoutRow(modifier: Modifier = Modifier) {
     ) {
         Box(
             modifier = Modifier
-                .width(44.dp)
-                .height(44.dp)
+                .width(dimensionResource(id = R.dimen.icon_w_h))
+                .height(dimensionResource(id = R.dimen.icon_w_h))
                 .clip(RoundedCornerShape(10.dp))
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(
-                            Color(0xFF34C8E8),
-                            Color(0xFF4E4AF2)
-                        )
-                    )
-                )
-                .clickable { /* Handle click here */ },
+                .gradientBackground()
+                .clickable { },
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -73,7 +67,7 @@ fun CheckoutRow(modifier: Modifier = Modifier) {
             )
         }
         Text(
-            "Checkout",
+            stringResource(R.string.checkout),
             textAlign = TextAlign.Center,
             color = Color.Gray,
             fontSize = 15.sp,

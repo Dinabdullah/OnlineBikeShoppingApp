@@ -22,13 +22,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.onlinebikeshoppingapp.R
 
 @Composable
 fun ApplyCodeRow(
-    modifier: Modifier =Modifier,
+    modifier: Modifier = Modifier,
     onClick: (applyCode: String) -> Unit
 ) {
     var applyCode by remember { mutableStateOf("") }
@@ -53,37 +54,21 @@ fun ApplyCodeRow(
     ) {
         androidx.compose.foundation.text.BasicTextField(
             value = applyCode,
-            onValueChange = {applyCode=it},
+            onValueChange = { applyCode = it },
             singleLine = true,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 12.dp, end = 8.dp),
-            decorationBox = { innerTextField ->
-                if ("".isEmpty()) {
-                    Text(
-                        text = "",
-                        color = Color.Gray
-                    )
-                }
-                innerTextField()
-            }
         )
         Button(
             modifier = modifier
                 .width(114.dp)
                 .height(44.dp)
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(
-                            Color(0xFF34C8E8),
-                            Color(0xFF4E4AF2)
-                        )
-                    )
-                ),
+                .gradientBackground(),
             onClick = { onClick(applyCode) },
             shape = RoundedCornerShape(10.dp),
         ) {
-            Text("Apply")
+            Text(stringResource(R.string.apply))
         }
 
     }
@@ -92,5 +77,5 @@ fun ApplyCodeRow(
 @Preview
 @Composable
 private fun ApplyCodeRowPreview() {
-    ApplyCodeRow(){}
+    ApplyCodeRow() {}
 }
