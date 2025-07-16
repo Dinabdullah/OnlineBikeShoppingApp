@@ -12,7 +12,7 @@
     <string name="subtotal">Subtotal:</string>
     <string name="delivery_fee">Delivery Fee:</string>
     <string name="discount">Discount:</string>
-    <string name="total">Total:\"</string>
+    <string name="total">Total:\</string>
     <string name="checkout">Checkout</string>
     <string name="my_shopping_cart">My Shopping Cart</string>
 

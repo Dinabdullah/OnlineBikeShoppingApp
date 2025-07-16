@@ -20,36 +20,41 @@ class ShoppingCartViewModel : ViewModel() {
 
     fun onEvent(event: CartEvent) {
         when (event) {
-            is CartEvent.Increase -> {
-                val updatedItems = _state.value.items.map { item ->
-                    if (item.id == event.id) {
-                        item.copy(count = item.count + 1)
-                    } else item
-                }
-                _state.value = _state.value.copy(items = updatedItems)
-            }
+            is CartEvent.Increase -> Incrase(event.id)
 
-            is CartEvent.Decrease -> {
-                val updatedItems = _state.value.items.map { item ->
-                    if (item.id == event.id) {
-                        item.copy(count = if (item.count > 0) item.count - 1 else 0)
-                    } else item
-                }
-                _state.value = _state.value.copy(items = updatedItems)
-            }
+            is CartEvent.Decrease -> Decrase(event.id)
 
-            is CartEvent.ApplyCode -> {
-                val subtotal = _state.value.items.sumOf { it.price * it.count }
-                val total = subtotal
-                // val total = subtotal * 0.7  for any Discount
-                _state.value = _state.value.copy(
-                    appliedCode = event.code,
-                    isPromoApplied = true,
-                    subtotal = subtotal,
-                    total = total
-                )
-            }
+            is CartEvent.CalculateTotal -> CalculateTotal()
+
+            is CartEvent.ApplyCode -> ApplyCode(event.code)
         }
     }
+
+    private fun Incrase(id: Int) {
+        val updatedItems = _state.value.items.map { item ->
+            if (item.id == id) {
+                item.copy(count = item.count + 1)
+            } else item
+        }
+        _state.value = _state.value.copy(items = updatedItems)
+    }
+
+    private fun Decrase(id: Int) {
+        val updatedItems = _state.value.items.map { item ->
+            if (item.id == id) {
+                item.copy(count = if (item.count > 0) item.count - 1 else 0)
+            } else item
+        }
+        _state.value = _state.value.copy(items = updatedItems)
+    }
+
+    private fun CalculateTotal() {
+        val subtotal = _state.value.items.sumOf { it.price * it.count }
+        val total = subtotal
+        _state.value = _state.value.copy(subtotal = subtotal, total = total)
+    }
+
+    private fun ApplyCode(code: String) {}
+
 
 }

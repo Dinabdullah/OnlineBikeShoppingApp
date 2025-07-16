@@ -37,7 +37,7 @@ fun ApplyCodeRow(
         modifier = modifier
             .padding(
                 horizontal = dimensionResource(id = R.dimen.dp_20),
-                vertical = dimensionResource(id = R.dimen.dp_16)
+                vertical = dimensionResource(id = R.dimen.dp_12)
             )
             .width(dimensionResource(id = R.dimen.dp_350))
             .height(dimensionResource(id = R.dimen.dp_44))

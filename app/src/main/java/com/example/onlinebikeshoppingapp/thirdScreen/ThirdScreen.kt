@@ -3,6 +3,7 @@ package com.example.onlinebikeshoppingapp.thirdScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,7 +19,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,8 +31,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.onlinebikeshoppingapp.R
 
@@ -42,7 +42,7 @@ fun ThirdScreen(
     modifier: Modifier = Modifier
 ) {
     val viewModel: ShoppingCartViewModel = viewModel()
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -79,21 +79,29 @@ fun ThirdScreen(
             )
         }
     ) { paddingValues ->
-        LazyColumn(
+        Column(
             modifier = Modifier
                 .background(colorResource(id = R.color.card_background))
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            items(state.items) { item ->
-                CustomShoppingCartItem(
-                    item = item,
-                    onDecrease = { viewModel.onEvent(CartEvent.Decrease(item.id)) },
-                    onIncrease = { viewModel.onEvent(CartEvent.Increase(item.id)) }
-                )
+            LazyColumn(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                items(state.items) { item ->
+                    CustomShoppingCartItem(
+                        item = item,
+                        onDecrease = { viewModel.onEvent(CartEvent.Decrease(item.id)) },
+                        onIncrease = { viewModel.onEvent(CartEvent.Increase(item.id)) }
+                    )
+                }
             }
 
-            item {
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)) {
                 Text(
                     stringResource(R.string.your_bag_qualifies_for_free_shipping),
                     fontSize = 15.sp,
@@ -101,18 +109,15 @@ fun ThirdScreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top =dimensionResource(id = R.dimen.dp_10))
+                        .padding(top = dimensionResource(id = R.dimen.dp_10))
+
                 )
-            }
 
-            item {
                 ApplyCodeRow(onClick = {
-                    viewModel.onEvent(CartEvent.ApplyCode(it))
+                    viewModel.onEvent(CartEvent.CalculateTotal)
                 })
-            }
 
-            if (state.isPromoApplied) {
-                item {
+                if (state.subtotal > 0) {
                     PriceDetails(
                         total = state.total,
                         subtotal = state.subtotal
@@ -122,7 +127,6 @@ fun ThirdScreen(
         }
     }
 }
-
 
 fun Modifier.gradientBackground(): Modifier {
     return this.background(
@@ -134,6 +138,7 @@ fun Modifier.gradientBackground(): Modifier {
         )
     )
 }
+
 @Preview
 @Composable
 private fun ThirdScreenPreview() {

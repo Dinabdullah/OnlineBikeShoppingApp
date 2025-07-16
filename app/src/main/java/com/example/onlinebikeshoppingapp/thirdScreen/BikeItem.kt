@@ -5,6 +5,6 @@ data class BikeItem(
     val imageRes: Int,
     val titleRes: Int,
     val price: Double,
-    val count: Int = 1
+    val count: Int = 0
 )
 
