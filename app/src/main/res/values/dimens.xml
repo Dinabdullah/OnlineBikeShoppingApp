@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<dimen name="padding_small">4dp</dimen>
-<dimen name="padding_medium">8dp</dimen>
-<dimen name="padding_large">16dp</dimen>
+<dimen name="dp_4">4dp</dimen>
+<dimen name="dp_8">8dp</dimen>
+<dimen name="dp_16">16dp</dimen>
 
-<dimen name="item_width">390dp</dimen>
-<dimen name="item_height">120dp</dimen>
-<dimen name="image_size">50dp</dimen>
-<dimen name="counter_width">80dp</dimen>
-<dimen name="counter_height">30dp</dimen>
-<dimen name="icon_w_h">44dp</dimen>
+<dimen name="dp_390">390dp</dimen>
+<dimen name="dp_120">120dp</dimen>
+<dimen name="dp_50">50dp</dimen>
+<dimen name="dp_80">80dp</dimen>
+<dimen name="dp_30">30dp</dimen>
+<dimen name="dp_20">20dp</dimen>
+<dimen name="dp_10">10dp</dimen>
+<dimen name="dp_44">44dp</dimen>
 
-<dimen name="corner_radius">8dp</dimen>
 
 <dimen name="title_text_size">15sp</dimen>
 <dimen name="price_text_size">13sp</dimen>
 <dimen name="counter_text_size">15sp</dimen>
 
-<dimen name="divider_thickness">0.5dp</dimen>
+<dimen name="dp_0.5">0.5dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_350">350dp</dimen>
+    <dimen name="dp_114">114dp</dimen>
+    <dimen name="dp_174">174dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_90">90dp</dimen>
 </resources>

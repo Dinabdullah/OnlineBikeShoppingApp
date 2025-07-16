@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,9 +36,9 @@ fun CustomShoppingCartItem(
     Row(
         modifier = modifier
             .background(colorResource(id = R.color.shadow_color))
-            .width(390.dp)
-            .height(120.dp)
-            .padding(horizontal = 16.dp),
+            .width(dimensionResource(id = R.dimen.dp_390))
+            .height(dimensionResource(id = R.dimen.dp_120))
+            .padding(horizontal = dimensionResource(id = R.dimen.dp_16)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -45,14 +46,14 @@ fun CustomShoppingCartItem(
         ProductImage(
             imageRes = item.imageRes,
             modifier = Modifier
-                .width(100.dp)
-                .height(90.dp)
+                .width(dimensionResource(id = R.dimen.dp_100))
+                .height(dimensionResource(id = R.dimen.dp_90))
         )
 
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(start = 12.dp)
+                .padding(start = dimensionResource(id = R.dimen.dp_12))
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.Start
@@ -76,7 +77,7 @@ fun CustomShoppingCartItem(
 
         ItemCounter(
             item = item,
-            modifier = Modifier.padding(top = 50.dp),
+            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.dp_50)),
             onDecrease = onDecrease,
             onIncrease = onIncrease
         )
@@ -85,7 +86,7 @@ fun CustomShoppingCartItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(0.5.dp)
+            .height(dimensionResource(id = R.dimen.dp_0_5))
             .background(Color.White.copy(alpha = 0.3f))
     )
 }

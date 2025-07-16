@@ -36,15 +36,15 @@ fun ItemCounter(
     Row(
         modifier = modifier
             .shadow(
-                elevation = 4.dp,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)),
+                elevation = dimensionResource(id = R.dimen.dp_4),
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp_8)),
                 ambientColor = colorResource(id = R.color.card_background),
                 spotColor = colorResource(id = R.color.card_background)
             )
-            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)))
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp_8)))
             .background(
                 color = colorResource(id = R.color.counter_background),
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius))
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp_8))
             ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -53,7 +53,7 @@ fun ItemCounter(
             painter = painterResource(id = R.drawable.minusitem),
             contentDescription = null,
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_small))
+                .padding(dimensionResource(id = R.dimen.dp_4))
                 .clickable { onDecrease() }
         )
 
@@ -71,7 +71,7 @@ fun ItemCounter(
             painter = painterResource(id = R.drawable.additem),
             contentDescription = null,
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_small))
+                .padding(dimensionResource(id = R.dimen.dp_4))
                 .clickable { onIncrease() }
         )
     }

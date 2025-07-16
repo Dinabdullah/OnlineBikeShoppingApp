@@ -54,11 +54,11 @@ fun ThirdScreen(
                 navigationIcon = {
                     Box(
                         modifier = Modifier
-                            .padding(start = 20.dp)
-                            .padding(vertical = 10.dp)
-                            .width(dimensionResource(id = R.dimen.icon_w_h))
-                            .height(dimensionResource(id = R.dimen.icon_w_h))
-                            .clip(RoundedCornerShape(10.dp))
+                            .padding(start = dimensionResource(id = R.dimen.dp_20))
+                            .padding(vertical = dimensionResource(id = R.dimen.dp_10))
+                            .width(dimensionResource(id = R.dimen.dp_44))
+                            .height(dimensionResource(id = R.dimen.dp_44))
+                            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp_10)))
                             .gradientBackground()
                             .clickable { },
                         contentAlignment = Alignment.Center
@@ -101,7 +101,7 @@ fun ThirdScreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp)
+                        .padding(top =dimensionResource(id = R.dimen.dp_10))
                 )
             }
 

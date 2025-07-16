@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -34,28 +33,28 @@ import com.example.onlinebikeshoppingapp.R
 fun CheckoutRow(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
-            .padding(horizontal = 20.dp, vertical = 16.dp)
-            .width(174.dp)
-            .height(44.dp)
+            .padding(horizontal = dimensionResource(id = R.dimen.dp_20), vertical = dimensionResource(id = R.dimen.dp_16))
+            .width(dimensionResource(id = R.dimen.dp_174))
+            .height(dimensionResource(id = R.dimen.dp_44))
             .shadow(
-                elevation = 4.dp,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)),
+                elevation = dimensionResource(id = R.dimen.dp_4),
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp_8)),
                 ambientColor = colorResource(id = R.color.card_background),
                 spotColor = colorResource(id = R.color.card_background)
             )
-            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius)))
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp_8)))
             .background(
                 color = colorResource(id = R.color.counter_background),
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius))
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp_8))
             ),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier
-                .width(dimensionResource(id = R.dimen.icon_w_h))
-                .height(dimensionResource(id = R.dimen.icon_w_h))
-                .clip(RoundedCornerShape(10.dp))
+                .width(dimensionResource(id = R.dimen.dp_44))
+                .height(dimensionResource(id = R.dimen.dp_44))
+                .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp_10)))
                 .gradientBackground()
                 .clickable { },
             contentAlignment = Alignment.Center

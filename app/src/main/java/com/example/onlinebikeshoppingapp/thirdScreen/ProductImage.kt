@@ -26,9 +26,9 @@ fun ProductImage(
 ) {
     Box(
         modifier = modifier
-            .padding((dimensionResource(id = R.dimen.padding_small)))
-            .width((dimensionResource(id = R.dimen.image_size)))
-            .height((dimensionResource(id = R.dimen.image_size)))
+            .padding((dimensionResource(id = R.dimen.dp_4)))
+            .width((dimensionResource(id = R.dimen.dp_50)))
+            .height((dimensionResource(id = R.dimen.dp_50)))
             .background(
                 brush = Brush.linearGradient(
                     colors = listOf(
@@ -36,14 +36,14 @@ fun ProductImage(
                         colorResource(id = R.color.gradient_end)
                     )
                 ),
-                shape = RoundedCornerShape((dimensionResource(id = R.dimen.corner_radius)))
+                shape = RoundedCornerShape((dimensionResource(id = R.dimen.dp_8)))
             ),
         contentAlignment = Alignment.Center
     ) {
         Image(
             modifier = Modifier
                 .fillMaxSize()
-                .padding((dimensionResource(id = R.dimen.padding_small))),
+                .padding((dimensionResource(id = R.dimen.dp_4))),
             painter = painterResource(id = imageRes),
             contentDescription = null
         )

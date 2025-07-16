@@ -40,7 +40,7 @@ class ShoppingCartViewModel : ViewModel() {
 
             is CartEvent.ApplyCode -> {
                 val subtotal = _state.value.items.sumOf { it.price * it.count }
-                val total = subtotal * 0.7
+                val total = subtotal
                 // val total = subtotal * 0.7  for any Discount
                 _state.value = _state.value.copy(
                     appliedCode = event.code,
